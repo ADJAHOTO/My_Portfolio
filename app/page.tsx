@@ -241,7 +241,6 @@ export default function HomePage() {
         {/* Hero Section */}
          <HeroSection
           sectionRef={sections[0].ref}
-          scrollYProgress={scrollYProgress}
           y={y}
           opacity={opacity}
         />

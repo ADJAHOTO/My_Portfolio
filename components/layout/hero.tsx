@@ -14,12 +14,11 @@ import { Button } from '@/components/ui/button'; // Your shadcn/ui Button compon
 // Define the interface for the component's props
 interface HeroSectionProps {
   sectionRef: React.RefObject<HTMLDivElement | null>; // Corrected type for null
-  scrollYProgress: MotionValue<number>; // For scroll-linked animations
   y: MotionValue<number>; // For parallax/scroll animations
   opacity: MotionValue<number>; // For scroll-linked opacity
 }
 
-export function HeroSection({ sectionRef, scrollYProgress, y, opacity }: HeroSectionProps) {
+export function HeroSection({ sectionRef, y, opacity }: HeroSectionProps) {
   return (
     <section
       id="home"
