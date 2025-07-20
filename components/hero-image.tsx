@@ -70,7 +70,7 @@ export function HeroImage() {
       <div className="relative aspect-square w-full max-w-[450px]">
         <div className="relative h-full w-full overflow-hidden rounded-full border-8 border-primary/10 bg-background/80 backdrop-blur-sm">
           <Image
-            src="/placeholder.svg?height=450&width=450"
+            src="/ben.png"
             alt="Portrait de Jean Bénisse"
             width={450}
             height={450}
@@ -128,7 +128,7 @@ export function HeroImage() {
         }}
       >
         <Image
-          src="/placeholder.svg?height=450&width=450"
+          src="/ben.png"
           alt="Portrait de Jean Bénisse"
           width={450}
           height={450}

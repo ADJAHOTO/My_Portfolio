@@ -19,7 +19,7 @@ const DOT_POSITIONS = Array.from({ length: 20 }).map((_, i) => ({
   initialY: `${Math.floor((i * 7) % 100)}%`,
   initialOpacity: 0.2 + (i % 10) * 0.03,
   durations: [10 + (i % 10), 15 + (i % 5), 8 + (i % 7)],
-}));
+}))
 
 export function DevShowcase({ images }: DevShowcaseProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -35,7 +35,7 @@ export function DevShowcase({ images }: DevShowcaseProps) {
     return () => clearInterval(interval)
   }, [images.length])
 
-  // Rendu minimal côté serveur
+  // Rendu minimal côté serveur (sans dépendance à resolvedTheme)
   if (!isMounted) {
     return (
       <div className="relative h-full w-full overflow-hidden rounded-2xl border-2 border-primary/20">
@@ -47,11 +47,7 @@ export function DevShowcase({ images }: DevShowcaseProps) {
             className="object-cover"
             priority
           />
-          <div className={`absolute inset-0 bg-gradient-to-t ${
-            resolvedTheme === "dark"
-              ? "from-background via-background/70 to-transparent"
-              : "from-background via-background/60 to-transparent"
-          }`} />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
         </div>
       </div>
     )
@@ -59,7 +55,7 @@ export function DevShowcase({ images }: DevShowcaseProps) {
 
   return (
     <div className="relative h-full w-full overflow-hidden rounded-2xl border-2 border-primary/20">
-      {/* Animated background - seulement côté client */}
+      {/* Animated background */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-purple-500/20"
         animate={{
@@ -68,7 +64,7 @@ export function DevShowcase({ images }: DevShowcaseProps) {
             "linear-gradient(to bottom right, rgba(168, 85, 247, 0.2), transparent, rgba(147, 51, 234, 0.2))",
           ],
         }}
-        transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }}
+        transition={{ duration: 5, repeat: Infinity, repeatType: "reverse" }}
       />
 
       {/* Images */}
@@ -92,7 +88,7 @@ export function DevShowcase({ images }: DevShowcaseProps) {
           </motion.div>
         </AnimatePresence>
 
-        {/* Overlay with gradient */}
+        {/* Overlay avec resolvedTheme, maintenant safe côté client */}
         <div
           className={`absolute inset-0 bg-gradient-to-t ${
             resolvedTheme === "dark"
@@ -101,7 +97,7 @@ export function DevShowcase({ images }: DevShowcaseProps) {
           }`}
         />
 
-        {/* Animated dots overlay - avec positions prédéfinies */}
+        {/* Dots animés */}
         <div className="absolute inset-0 overflow-hidden">
           {DOT_POSITIONS.map((dot) => (
             <motion.div
@@ -127,7 +123,7 @@ export function DevShowcase({ images }: DevShowcaseProps) {
               }}
               transition={{
                 duration: dot.durations[0],
-                repeat: Number.POSITIVE_INFINITY,
+                repeat: Infinity,
                 repeatType: "reverse",
                 ease: "easeInOut",
               }}
@@ -136,7 +132,7 @@ export function DevShowcase({ images }: DevShowcaseProps) {
         </div>
       </div>
 
-      {/* Indicators */}
+      {/* Indicateurs */}
       <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
         {images.map((_, index) => (
           <button
